@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Visit us</title>
+  <script type="text/javascript">
+    function java(event) {
+      // Prevent page reload
+      event.preventDefault();
+
+      // Get the email value
+      var email = document.getElementById("email").value.trim();
+
+      // Check if email contains '@'
+      if (email === "" || !email.includes("@")) {
+        alert("Please enter a valid email address (not just a name).");
+        return false;
+      }
+
+      // If email looks valid
+      alert("Do you want to submit?");
+      return true;
+    }
+  </script>
+</head>
+
+<body text="black" bgcolor="#c2b280">
+  <br><br>
+  <font face="TimesNewRomans" size="4" color="black">
+    <center><h1>Visit us</h1></center>
+    <br><br>
+    <center><h1>Let’s Brew Up a Conversation!</h1></center>
+
+    <center>
+      <form>
+        <table width="300" cellspacing="10">
+          <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td><input type="text" id="name" placeholder="Your name..."></td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td><input type="text" id="email" placeholder="Your email..."></td>
+          </tr>
+          <tr>
+            <td>Message</td>
+            <td>:</td>
+            <td><textarea id="message" placeholder="Tell us what's on your mind..."></textarea></td>
+          </tr>
+          <tr>
+            <td>Submit</td>
+            <td>:</td>
+            <td>
+              <button type="submit" onclick="java(event)">Submit</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </center>
+
+    <br><br><br><br><br><br><br><br>
+
+    <div class="footer" align="center">
+      📍 Visit us at: Nagercoil, Kanyakumari<br>
+      📞 Call: +91-7530017429<br>
+      ✉️ Email: sreemalathisreekumar@gmail.com
+    </div>
+  </font>
+</body>
+</html>
