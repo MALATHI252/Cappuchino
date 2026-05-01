@@ -2,59 +2,91 @@
 <html>
 <head>
   <title>Visit us</title>
+
   <script type="text/javascript">
-    function java(event) {
-      // Prevent page reload
-      event.preventDefault();
+    document.addEventListener("DOMContentLoaded", function () {
 
-      // Get the email value
-      var email = document.getElementById("email").value.trim();
+      document.getElementById("contactForm").addEventListener("submit", function(e){
+        e.preventDefault();
 
-      // Check if email contains '@'
-      if (email === "" || !email.includes("@")) {
-        alert("Please enter a valid email address (not just a name).");
-        return false;
-      }
+        var email = document.getElementById("email").value.trim();
 
-      // If email looks valid
-      alert("Do you want to submit?");
-      return true;
-    }
+        // Validation
+        if (email === "" || !email.includes("@")) {
+          alert("Please enter a valid email address");
+          return;
+        }
+
+        // Collect form data
+        const formData = new FormData(this);
+
+        // Send to Flask backend
+        fetch("http://127.0.0.1:5000/contact", {
+          method: "POST",
+          body: formData
+        })
+        .then(res => res.text())
+        .then(data => {
+          alert(data);
+          document.getElementById("contactForm").reset(); // clear form
+        })
+        .catch(err => {
+          alert("Error connecting to server");
+          console.log(err);
+        });
+
+      });
+
+    });
   </script>
+
 </head>
 
 <body text="black" bgcolor="#c2b280">
   <br><br>
+
   <font face="TimesNewRomans" size="4" color="black">
+    
     <center><h1>Visit us</h1></center>
     <br><br>
     <center><h1>Let’s Brew Up a Conversation!</h1></center>
 
     <center>
-      <form>
+      <form id="contactForm">
         <table width="300" cellspacing="10">
+          
           <tr>
             <td>Name</td>
             <td>:</td>
-            <td><input type="text" id="name" placeholder="Your name..."></td>
+            <td>
+              <input type="text" id="name" name="name" placeholder="Your name..." required>
+            </td>
           </tr>
+
           <tr>
             <td>Email</td>
             <td>:</td>
-            <td><input type="text" id="email" placeholder="Your email..."></td>
+            <td>
+              <input type="text" id="email" name="email" placeholder="Your email..." required>
+            </td>
           </tr>
+
           <tr>
             <td>Message</td>
             <td>:</td>
-            <td><textarea id="message" placeholder="Tell us what's on your mind..."></textarea></td>
+            <td>
+              <textarea id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
+            </td>
           </tr>
+
           <tr>
             <td>Submit</td>
             <td>:</td>
             <td>
-              <button type="submit" onclick="java(event)">Submit</button>
+              <button type="submit">Submit</button>
             </td>
           </tr>
+
         </table>
       </form>
     </center>
@@ -66,6 +98,8 @@
       📞 Call: +91-7530017429<br>
       ✉️ Email: sreemalathisreekumar@gmail.com
     </div>
+
   </font>
+
 </body>
 </html>
